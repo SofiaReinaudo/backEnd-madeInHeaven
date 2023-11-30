@@ -2,7 +2,6 @@
     <!-- Sección navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-<<<<<<< HEAD
             <a class="navbar-brand" href="/">Made In Heaven</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +25,6 @@
                         <a class="nav-link" href="/api/carts">Carrito</a>
                     </li>
                 </ul>
-=======
             <a class="navbar-brand" href="#">Made In Heaven</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,7 +41,6 @@
                 <a class="nav-link" href="/home/realtimeproducts">Productos en tiempo real</a>
                 </li>
             </ul>
->>>>>>> 9d259a333a12a765399b3a5c46f1ff480a996f00
             </div>
         </div>
     </nav>
@@ -53,7 +50,6 @@
     <div class="row">
         <div class="col">
             <div id="contenedorProductos" class="row row-cols-1 row-cols-md-3 g-4">
-<<<<<<< HEAD
                 {{#each payload}}
                 <div id="productoItem" class="card">
                     <img src="{{this.thumbnail}}" class="card-img-top" alt="{{this.title}}">
@@ -92,7 +88,7 @@
     </div>
     <script>
         function addToCart(productId) {
-            const idCart = ''
+            const idCart = '6567d6196d64c4733491d04a'
             fetch(`/api/carts/${idCart}/product/${productId}`, {
                 method: 'POST',
                 headers: {
@@ -107,20 +103,5 @@
                     console.log('Error: ', error)
                 })
         }
-    </script>
-=======
-                {{#each products}}
-                    <div id="productoItem" class="card">
-                        <img src="{{this.thumbnail}}" class="card-img-top" alt="{{this.title}}">
-                        <div class="card-body">
-                            <span><h2 style="font-size: 30px; margin-top: -5px;">{{this.title}}</h2></span>
-                            <span><p style="margin-top: -5px;">${{this.price}}</p></span> 
-                            <button id="btnComprar" class="btn btn-dark" style="margin-top: -10px;">Comprar</button>                   
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
-    </div>            
->>>>>>> 9d259a333a12a765399b3a5c46f1ff480a996f00
+    </script>        
 </div>
