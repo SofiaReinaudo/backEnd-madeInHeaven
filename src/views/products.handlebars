@@ -2,7 +2,7 @@
     <!-- Sección navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Made In Heaven</a>
+            <a class="navbar-brand" href="#">Made In Heaven</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col">
             <div id="contenedorProductos" class="row row-cols-1 row-cols-md-3 g-4">
-                {{#each payload}}
+                {{#each result.payload}}
                 <div id="productoItem" class="card">
                     <img src="{{this.thumbnail}}" class="card-img-top" alt="{{this.title}}">
                     <div class="card-body">
@@ -51,13 +51,14 @@
             </div>
         </div>
     </div>
+
     <script>
-        function addToCart(productId) {
+        function addToCart(productId){
             const idCart = ''
-            fetch(`/api/carts/${idCart}/product/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+            fetch(`/api/carts/${idCart}/product/${productId}`,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
                 },
             })
                 .then(resp => resp.json())

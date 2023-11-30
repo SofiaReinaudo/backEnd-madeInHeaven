@@ -2,7 +2,7 @@
     <!-- Sección navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Made In Heaven</a>
+            <a class="navbar-brand" href="/">Made In Heaven</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,23 +22,23 @@
                         <a class="nav-link" href="/chat">Chat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/api/carts">Cart</a>
+                        <a class="nav-link" href="/cart">Carrito</a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<div>
-    <h1>Bienvenidos al chat de made In Heaven</h1>
-</div>
 
-<div>
-    <p id="messageLogs"></p>
-    <input id="chatBox" class="border">
-</div>
+<div class="carrito">
+    <h2>Lista de compras:</h2>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/chat.js"></script>
+    {{#each carrito.products}}
+    <div>
+        <h4>Nombre del Producto: {{this.id.title}}</h4>
+        <p>Descripcion:{{this.id.description}}</p>
+        <p>Precio: ${{this.id.price}}</p>
+        <p>Cantidad: {{this.quantity}}</p>
+    </div>
+    {{/each}}
+</div>

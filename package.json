@@ -1,7 +1,7 @@
 {
-  "name": "01_desafio",
+  "name": "segunda-pre-entrega",
   "version": "1.0.0",
-  "description": "",
+  "description": "backend",
   "main": "productManager.js",
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "node ./src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sofía Reinaudo",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",

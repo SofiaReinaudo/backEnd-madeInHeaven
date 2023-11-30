@@ -8,9 +8,8 @@ import carts from './routers/carts.js';
 import views from './routers/views.js';
 import __dirname from "./utlis.js";
 import { dbConnection } from "./database/config.js";
-import { productModel } from "./models/products.js";
 import { messageModel } from "./models/messages.js";
-
+import { getProductsService, addProductService} from "./services/products.js"
 
 const app = express();
 const PORT = process.env.PORT;
@@ -35,18 +34,17 @@ const io = new Server(expressServer);
 
 io.on('connection', async (socket) => {
 
-    // Products
-    const productos = await productModel.find();
-    socket.emit('productos', productos);
+    const { payload } = await getProductsService({});
+    const productos = payload
+    socket.emit('productos', {payload});
     socket.on('agregarProducto', async (producto) => {
-        const newProduct = await productModel.create({ ...producto });
+        const newProduct = await addProductService({...producto});
         if (newProduct) {
             productos.push(newProduct)
             socket.emit('productos', productos);
         }
     });
 
-    // Chat messages
     const messages = await messageModel.find();
     socket.emit('message', messages);
 
