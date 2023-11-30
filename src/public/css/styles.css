@@ -71,3 +71,24 @@ body {
 #containerItems {
     border: 0px;
 }
+
+/*pagination*/
+
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    background-color: darkslategrey;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination a:hover {
+    background-color: #555;
+}

@@ -50,6 +50,25 @@
                 {{/each}}
             </div>
         </div>
+        <div class="pagination">
+            <span>Limite por pagina: {{limit}}</span><br>
+        
+            {{#if query}}
+            <span>Filtrado por: {{query}}</span><br>
+            {{/if}}
+        
+            {{#if hasPrevPage}}
+            <a
+                href="?page={{result.prevPage}}&limit={{result.limit}}{{#if result.query}}&query={{result.query}}{{/if}}">Anterior</a>
+            {{/if}}
+        
+            <span>Pagina {{result.page}} de {{result.totalPages}}</span>
+        
+            {{#if hasNextPage}}
+            <a
+                href="?page={{nextPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}">Siguiente</a>
+            {{/if}}
+        </div>
     </div>
     <script>
         function addToCart(productId) {

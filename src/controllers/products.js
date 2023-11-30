@@ -29,7 +29,7 @@ export const addProduct = async (req = request, res = response) => {
         const { title, description, price, code, stock, category } = req.body;
 
         if (!title, !description, !price, !code, !stock, !category)
-            return res.status(404).json({ msg: 'Los campos: title, description, price, img, code, stock son obligatorios' })
+            return res.status(404).json({ msg: 'Los campos: title, description, price, thumbail, code, stock son obligatorios' })
 
         const producto = await addProductService({ ...req.body });
         return res.json({ producto })
