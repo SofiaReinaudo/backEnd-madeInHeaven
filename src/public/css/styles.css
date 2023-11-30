@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* tabla de productos */
 table {
     width: 100%;
@@ -64,10 +65,19 @@ body {
 
 #contenedorProductos {
     justify-content: space-between;
+=======
+body{
+    background-color: rgb(213, 209, 209);
+}
+
+#contenedorProductos{
+    justify-content: space-between; 
+>>>>>>> 9d259a333a12a765399b3a5c46f1ff480a996f00
     margin-top: 5px;
     margin-bottom: 50px;
 }
 
+<<<<<<< HEAD
 #containerItems {
     border: 0px;
 }
@@ -91,4 +101,8 @@ body {
 
 .pagination a:hover {
     background-color: #555;
+=======
+#containerItems{
+    border: 0px;
+>>>>>>> 9d259a333a12a765399b3a5c46f1ff480a996f00
 }
