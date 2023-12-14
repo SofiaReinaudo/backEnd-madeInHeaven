@@ -1,7 +1,6 @@
 import { request, response } from "express";
 import { getProductsService } from "../services/products.js";
 import { getCartByIdService } from "../services/carts.js";
-import { getUserEmail, registerUser } from "../services/user.js";
 
 
 export const homeView = async (req = request, res = response) => {
@@ -19,13 +18,13 @@ export const realTimeProductsView = async (req = request, res = response) => {
 
 export const chatView = async (req = request, res = response) => {
     const user = req.session.user;
-    return res.render('chat', { styles: 'chat.css', title: 'Chat' });
+    return res.render('chat', { styles: 'styles.css', title: 'Chat' , user});
 }
 
 export const productsView = async (req = request, res = response) => {
     const user = req.session.user;
     const result = await getProductsService({ ...req.query });
-    return res.render('products', { title: 'productos', result, styles: 'styles.css', user });
+    return res.render('products', { title: 'productos', ...result, styles: 'styles.css', user });
 }
 
 export const cartIdView = async (req = request, res = response) => {
@@ -36,21 +35,24 @@ export const cartIdView = async (req = request, res = response) => {
 }
 
 export const loginGet = async (req = request, res = response) => {
-    return res.render('login', {styles:'login.css'})
+    if(req.session.user)
+        return res.redirect('/')
+    return res.render('login', {styles:'styles.css'})
 }
 
-export const loginPost = async (req = request, res = response) => {
-    const {email, password} = req.body;
+export const login = async (req = request, res = response) => {
+    if(!req.user)
+        return res.redirect('/login');
+    
+    req.session.user = {
+        name: req.user.name,
+        lastName: req.user.lastName,
+        email: req.user.email,
+        rol: req.user.rol,
+        image: req.user.image
+    };
 
-    const user = await getUserEmail(email)
-
-    if(user && user.password === password){
-        const userName = `${user.name} ${user.lastName}`;
-        req.session.user = userName;
-        req.session.rol = user.rol;
-        return res.redirect('/');
-    }
-    return res.redirect('/login');
+    return res.redirect('/')
 }
 
 export const logout = (req = request, res = response) => {
@@ -64,23 +66,13 @@ export const logout = (req = request, res = response) => {
 }
 
 export const registerGet = async (req = request, res = response) => {
-    return res.render('register', {styles:'login.css'})
+    if(req.session.user)
+        return res.redirect('/')
+    return res.render('register', {styles:'styles.css'})
 }
 
 export const registerPost = async (req = request, res = response) => {
-    const {password, confirmPassword} = req.body;
-
-    if(password !== confirmPassword)
-        return res.redirect('/register')
-
-    const user = await registerUser({...req.body})
-
-    if(user){
-        const userName = `${user.name} ${user.lastName}`;
-        req.session.user = userName;
-        req.session.rol = user.rol;
-        return res.redirect('/')
-    }
-
-    return res.redirect('/register')
+    if(!req.user)
+        return res.redirect('/register');
+    return res.redirect('/login');
 }
