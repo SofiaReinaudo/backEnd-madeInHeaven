@@ -1,14 +1,17 @@
 {{> header}}
 
-<div>
-    <h1>Bienvenidos al chat de made In Heaven</h1>
-</div>
+<div class="container-chat">
+    <div>
+        <h1 class="mb-4">Bienvenidos al chat de made In Heaven🖤</h1>
+    </div>
 
-<div>
-    <p id="messageLogs"></p>
-    <input id="chatBox" class="border">
+    <div>
+        <p id="messageLogs"></p>
+        <input id="chatBox" placeholder="Escribe un mensaje" class="border">
+    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js"></script>
+
+{{> footer}}

@@ -1,0 +1,32 @@
+<div className="content px-5 bg-white" id="footerContainer">
+    <footer className="py-5">
+        <div className="row hola">
+            <div className="col-6 col-md-2 mb-3">
+            <h5 id="footerh5" >Sección</h5>
+            <div className="nav flex-column">
+                {{#if user}}
+                <a href="/" className="nav-item mb-2 linksFooter">Home</a>
+                <a href="/products" className="nav-item mb-2 linksFooter">Productos</a>
+                <a href="/realtimeproducts" className="nav-item mb-2 linksFooter">Productos en tiempo real</a>
+                <a href="/chat" className="nav-item mb-2 linksFooter">Chat</a>
+                <a href="/cart/6567d6196d64c4733491d04a" className="nav-item mb-2 linksFooter">Cart</a>
+                <a href="/logout" className="nav-item mb-2 linksFooter">Cerrar sesión</a>
+                {{else}}
+                <a href="/login" className="nav-item mb-2 linksFooter">Login</a>
+                <a href="/register" className="nav-item mb-2 linksFooter">Register</a>
+                {{/if}}
+            </div>
+            </div>
+        </div>
+        <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <div className="list-unstyled d-flex">
+                <a href="https://www.whatsapp.com/?lang=es" className="ms-3 icon"><svg className="bi" width="34" height="24"/><i className="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/sofi_reinaudo/?hl=es-la" className="ms-3 icon"><svg className="bi" width="24" height="24"/><i className="fab fa-instagram"></i></a>
+                <a href="https://github.com/SofiaReinaudo" className="ms-3 icon"><svg className="bi" width="24" height="24"/><i className="fab fa-github"></i></a>
+            </div>
+            <div className="text-center p-3">
+                © Proyecto Final - Coderhause - BackEnd - 2023 - Sofía Reinaudo
+            </div>
+        </div>    
+    </footer>
+</div>

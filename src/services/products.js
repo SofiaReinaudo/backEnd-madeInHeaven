@@ -4,7 +4,7 @@ export const getProductsService = async ({ limit = 2, page = 1, sort, query }) =
     try {
         page = page == 0 ? 1 : page;
         page = Number(page);
-        limit = Number(limit)
+        limit = Number(limit);
         const skip = (page - 1) * limit;
         const sortOrderOptions = { 'asc': -1, 'desc': 1 };
         sort = sortOrderOptions[sort] || null;
@@ -13,7 +13,7 @@ export const getProductsService = async ({ limit = 2, page = 1, sort, query }) =
             if (query)
                 query = JSON.parse(decodeURIComponent(query))
         } catch (error) {
-            console.log('Error al parsear', error)
+            console.log('Error al parsear: ', error);
             query = {}
         }
 
@@ -30,7 +30,6 @@ export const getProductsService = async ({ limit = 2, page = 1, sort, query }) =
         const prevPage = hasPrevPage ? page - 1 : null;
         const nextPage = hasNextPage ? page + 1 : null;
 
-
         return {
             totalDocs,
             totalPages,
@@ -45,35 +44,43 @@ export const getProductsService = async ({ limit = 2, page = 1, sort, query }) =
         }
 
     } catch (error) {
-        console.log('getProductService ->', error)
+        console.log('getProductsService -> ', error);
         throw error;
     }
 }
-
 
 export const getProductByIdService = async (pid) => {
     try {
         return await productModel.findById(pid);
     } catch (error) {
-        console.log('getProductByIdService ->', error)
+        console.log('getProductByIdService -> ', error);
         throw error;
     }
 }
 
-export const addProductService = async ({ title, description, price, thumbnails, code, stock, category, status }) => {
+export const getProductByCodeService = async (code) => {
     try {
-        return await productModel.create({ title, description, price, thumbnails, code, stock, status, category })
+        return await productModel.findOne({ code });
     } catch (error) {
-        console.log('addProductService ->', error)
+        console.log('getProductByCodeService -> ', error);
+        throw error;
+    }
+}
+
+export const addProductService = async (body) => {
+    try {
+        return await productModel.create({ ...body });
+    } catch (error) {
+        console.log('addProductService -> ', error);
         throw error;
     }
 }
 
 export const updateProductService = async (pid, rest) => {
     try {
-        return await productModel.findByIdAndUpdate(pid, { ...rest }, { new: true })
+        return await productModel.findByIdAndUpdate(pid, { ...rest }, { new: true });
     } catch (error) {
-        console.log('updateProductService ->', error)
+        console.log('updateProductService -> ', error);
         throw error;
     }
 }
@@ -81,9 +88,8 @@ export const updateProductService = async (pid, rest) => {
 export const deleteProductService = async (pid) => {
     try {
         return await productModel.findByIdAndDelete(pid);
-
     } catch (error) {
-        console.log('deleteProductService ->', error)
+        console.log('deleteProductService -> ', error);
         throw error;
     }
 }

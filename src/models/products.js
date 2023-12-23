@@ -10,7 +10,7 @@ const ProductoSchema = new Schema({
     status: { type: Boolean, default: true },
     stock: { type: Number, required: [true, 'El stock del producto es obligatorio'] },
     category: { type: String, required: [true, 'El category del producto es obligatorio'] },
-    thumbnails: [{ type: String }],
+    thumbnail: { type: String },
 });
 
 ProductoSchema.set('toJSON',{

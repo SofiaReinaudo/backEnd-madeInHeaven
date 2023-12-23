@@ -1,0 +1,63 @@
+{{> header}}
+<div class="container mt-5">
+    <h1 class="mb-4" style="color: rgb(235, 206, 217);">Agregar Productos</h1>
+
+    <form id="producto-form" enctype="multipart/form-data" action="/add-product" method="post" class="needs-validation">
+        <div class="mb-3">
+            <label for="title" class="form-label">Título:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa un título.
+            </div>
+        </div> 
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa una descripción.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio:</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa un precio.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="code" class="form-label">Código:</label>
+            <input type="text" class="form-control" id="code" name="code" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa un código.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="stock" class="form-label">Stock:</label>
+            <input type="number" class="form-control" id="stock" name="stock" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa el stock.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Categoría:</label>
+            <input type="text" class="form-control" id="category" name="category" required>
+            <div class="invalid-feedback">
+                Por favor, ingresa una categoría.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="file" class="form-label">Imagen:</label>
+            <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+            <div class="invalid-feedback">
+                Por favor, selecciona una imagen.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-dark">Agregar Producto</button>
+    </form>
+</div>

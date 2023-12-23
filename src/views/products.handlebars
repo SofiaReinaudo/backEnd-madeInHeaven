@@ -28,15 +28,13 @@
             {{/if}}
         
             {{#if hasPrevPage}}
-            <a
-                href="?page={{result.prevPage}}&limit={{result.limit}}{{#if result.query}}&query={{result.query}}{{/if}}">Anterior</a>
+            <button class="btn btn-dark"><a style="text-decoration: none; color:white" href="?page={{result.prevPage}}&limit={{result.limit}}{{#if result.query}}&query={{result.query}}{{/if}}">Anterior</a></button>
             {{/if}}
         
             <span>Pagina {{result.page}} de {{result.totalPages}}</span>
         
             {{#if hasNextPage}}
-            <a
-                href="?page={{nextPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}">Siguiente</a>
+            <button class="btn btn-dark"><a style="text-decoration: none; color:white" href="?page={{nextPage}}&limit={{limit}}{{#if query}}&query={{query}}{{/if}}">Siguiente</a></button>
             {{/if}}
         </div>
     </div>
@@ -59,3 +57,7 @@
         }
     </script>        
 </div>
+
+<a href="/add-product" class="btn btn-dark">Agregar productos</a>
+
+{{> footer}}

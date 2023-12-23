@@ -1,13 +1,16 @@
 import { Router } from 'express';
-import {homeView, cartIdView, productsView, chatView, realTimeProductsView, loginGet, registerGet, registerPost, logout, login} from '../controllers/views.js';
+import {homeView, cartIdView, productsView, chatView, realTimeProductsView, loginGet, registerGet, registerPost, logout, login, addProductView, addProductViewPost} from '../controllers/views.js';
 import { admin, auth } from '../middleware/auth.js';
 import passport from 'passport';
+import { uploader } from '../config/multer.js';
 const router = Router();
 
 router.get('/', auth,homeView);
 router.get('/realtimeproducts', [auth, admin],  realTimeProductsView);
 router.get('/chat', auth, chatView);
 router.get('/products', auth, productsView);
+router.get('/add-product', auth, addProductView);
+router.post('/add-product', [auth, uploader.single('file')], addProductViewPost);
 router.get('/cart/:cid', auth, cartIdView);
 router.get('/login', loginGet);
 router.post('/login', passport.authenticate('login', {failureRedirect:'/login'}),login);

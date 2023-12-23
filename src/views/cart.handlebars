@@ -1,14 +1,16 @@
 {{> header}}
 
-<div class="carrito">
-    <h2>Lista de compras:</h2>
+<div>
+    <h3>Lista de productos de un carrito:</h3>
 
     {{#each carrito.products}}
     <div>
-        <h4>Nombre del Producto: {{this.id.title}}</h4>
-        <p>Descripcion:{{this.id.description}}</p>
+        <h4>Nombre del producto: {{this.id.title}}</h4>
+        <p>Descripción: {{this.id.description}}</p>
         <p>Precio: ${{this.id.price}}</p>
         <p>Cantidad: {{this.quantity}}</p>
     </div>
     {{/each}}
 </div>
+
+{{> footer}}
