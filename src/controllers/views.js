@@ -23,7 +23,7 @@ export const chatView = async (req = request, res = response) => {
 export const productsView = async (req = request, res = response) => {
     const result = await ProductsRepository.getProducts({ ...req.query });
     const user = req.session.user;
-    return res.render('productos', {  title: 'productos', ...result, styles: 'styles.css', user })
+    return res.render('products', {  title: 'productos', ...result, styles: 'styles.css', user })
 }
 
 export const addProductView = async (req = request, res = response) => {
