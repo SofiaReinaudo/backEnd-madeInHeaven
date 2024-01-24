@@ -11,8 +11,8 @@ import carts from './routers/carts.js';
 import views from './routers/views.js';
 import __dirname from "./utlis.js";
 import { dbConnection } from "./database/config.js";
-import { messageModel } from "./models/messages.js";
-import { getProductsService, addProductService} from "./services/products.js"
+import { messageModel } from "./dao/mongo/models/messagesModel.js";
+import { ProductsRepository} from "./repositories/index.js";
 import { initializaPassport } from "./config/passport.js";
 
 const app = express();
@@ -51,12 +51,12 @@ const io = new Server(httpServer);
 
 io.on('connection', async (socket) => {
     const limit = 50;
-    const { payload } = await getProductsService({limit});
+    const { payload } = await ProductsRepository.getProducts({limit});
     const productos = payload;
 
     socket.emit('productos', payload);
     socket.on('agregarProducto', async (producto) => {
-        const newProduct = await addProductService({ ...producto })
+        const newProduct = await ProductsRepository.addProduct({ ...producto })
         if (newProduct) {
             productos.push(newProduct)
             socket.emit('productos', productos)

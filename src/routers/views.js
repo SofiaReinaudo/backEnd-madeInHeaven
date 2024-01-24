@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import {homeView, cartIdView, productsView, chatView, realTimeProductsView, loginGet, registerGet, registerPost, logout, login, addProductView, addProductViewPost} from '../controllers/views.js';
+import {homeView, cartIdView, productsView, chatView, realTimeProductsView, loginGet, registerGet, registerPost, logOut, login, addProductView, addProductViewPost} from '../controllers/views.js';
 import { admin, auth } from '../middleware/auth.js';
 import passport from 'passport';
 import { uploader } from '../config/multer.js';
@@ -16,7 +16,7 @@ router.get('/login', loginGet);
 router.post('/login', passport.authenticate('login', {failureRedirect:'/login'}),login);
 router.get('/register', registerGet);
 router.post('/register', passport.authenticate('register', {failureRedirect:'/register'}),registerPost);
-router.get('/logout', logout);
+router.get('/logout', logOut);
 router.get('/github', passport.authenticate('github', {scope:['user:email']}), async(req,res) => {});
 router.get('/login-github-callback', passport.authenticate('github', {failureRedirect:'/register'}), login);
 

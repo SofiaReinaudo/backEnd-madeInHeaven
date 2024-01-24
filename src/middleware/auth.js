@@ -7,7 +7,7 @@ export const auth = (req = request, res = response, next) => {
 }
 
 export const admin = (req = request, res = response, next) => {
-    if (req.session?.rol === 'admin') 
+    if (req.session?.user.rol === 'admin') 
         return next();
     return res.redirect('/');
 }

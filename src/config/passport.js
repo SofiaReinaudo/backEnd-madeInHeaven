@@ -1,7 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
 import GitHubStrategy from 'passport-github2';
-import { getUserById, getUserEmail, registerUser } from "../services/user.js";
+import { UsersRepository} from "../repositories/index.js";
 import { createHash, isValidPassword } from "../utils/bcryptPassword.js";
 
 const LocalStrategy = local.Strategy;
@@ -19,7 +19,7 @@ export const initializaPassport = () => {
                     return done(null, false)
                 }
 
-                const user = await getUserEmail(username);
+                const user = await UsersRepository.getUserByEmail(username);
 
                 if (user) {
                     console.log('El usuario ya existe');
@@ -28,7 +28,7 @@ export const initializaPassport = () => {
 
                 req.body.password = createHash(password);
 
-                const newUser = await registerUser({...req.body});
+                const newUser = await UsersRepository.registerUser({...req.body});
                 
                 if (newUser) 
                     return done(null, newUser);
@@ -43,7 +43,7 @@ export const initializaPassport = () => {
         { usernameField:'email' },
         async (username, password, done) => {
             try {
-                const user = await getUserEmail(username);
+                const user = await UsersRepository.getUserByEmail(username);
 
                 if(!user){
                     console.log('El usuario no existe.');
@@ -67,7 +67,7 @@ export const initializaPassport = () => {
         });
 
         passport.deserializeUser(async (id, done) => {
-            const user = await getUserById(id);
+            const user = await UsersRepository.getUserById(id);
             done(null, user);
         });
 
@@ -80,7 +80,7 @@ export const initializaPassport = () => {
             async (accesToken, refreshToken, profile, done) => {
                 try {
                     const email = profile._json.email;
-                    const user = await getUserEmail(email);
+                    const user = await UsersRepository.getUserByEmail(email);
 
                     if(user)
                         return done(null, user);
@@ -92,7 +92,7 @@ export const initializaPassport = () => {
                         github: true,
                     };
 
-                    const result = await registerUser({...newUser});
+                    const result = await UsersRepository.registerUser({...newUser});
                     return done(null, result);
                     
                 } catch (error) {
