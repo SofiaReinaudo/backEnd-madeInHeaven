@@ -1,9 +1,9 @@
-import { productModel } from "./models/productsModel.js";
+import { productModel } from './models/productsModel.js';
 
-export const getProducts = async ({ limit = 10, page = 1, sort, query }) => {
+export const getProducts = async ({ limit = 2, page = 1, sort, query }) => {
     page = page == 0 ? 1 : page;
     page = Number(page);
-    limit = Number(limit)
+    limit = Number(limit);
     const skip = (page - 1) * limit;
     const sortOrderOptions = { 'asc': -1, 'desc': 1 };
     sort = sortOrderOptions[sort] || null;
@@ -12,11 +12,13 @@ export const getProducts = async ({ limit = 10, page = 1, sort, query }) => {
         if (query)
             query = JSON.parse(decodeURIComponent(query))
     } catch (error) {
-        console.log('Error al parsear', error)
+        console.log('Error al parsear: ', error);
         query = {}
     }
 
-    const queryProducts = productModel.find(query).limit(limit).skip(skip).lean();
+    query = { ...query, status: true };
+
+    const queryProducts = productModel.find(query).limit(limit).skip(skip);
 
     if (sort !== null)
         queryProducts.sort({ price: sort });
@@ -28,7 +30,6 @@ export const getProducts = async ({ limit = 10, page = 1, sort, query }) => {
     const hasPrevPage = page > 1;
     const prevPage = hasPrevPage ? page - 1 : null;
     const nextPage = hasNextPage ? page + 1 : null;
-
 
     return {
         totalDocs,
