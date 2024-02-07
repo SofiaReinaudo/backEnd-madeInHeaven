@@ -1,7 +1,6 @@
 import { request, response } from 'express';
 import { CartsRepository, ProductsRepository, TicketsRepository, UsersRepository } from '../repositories/index.js';
 import { v4 as uuidv4 } from 'uuid';
-import { ticketModel } from '../dao/mongo/models/ticketModel.js';
 
 export const getCartById = async (req = request, res = response) => {
     try {

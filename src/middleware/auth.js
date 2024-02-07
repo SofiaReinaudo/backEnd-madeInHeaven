@@ -18,7 +18,6 @@ export const validarCampos = (req = request, res = response, next) => {
 
 export const validarJWT = (req = request, res = response, next) => {
     
-    //const token = req.header('Authorization')?.replace('Bearer ', '');
     const token = req.header('x-token');
     
     if(!token)
