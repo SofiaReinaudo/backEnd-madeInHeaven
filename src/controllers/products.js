@@ -2,6 +2,7 @@ import { request, response } from 'express';
 import { cloudinary } from '../config/cloudinary.js';
 import { validFileExtension } from '../utils/validFileExtension.js';
 import { ProductsRepository } from "../repositories/index.js";
+import { faker } from '@faker-js/faker';
 
 export const getProduct = async (req = request, res = response) => {
     try {
@@ -10,7 +11,7 @@ export const getProduct = async (req = request, res = response) => {
     } catch (error) {
         return res.status(500).json({ msg: "Hablar con un administrador" })
     }
-}
+};
 
 export const getProductById = async (req = request, res = response) => {
     try {
@@ -23,19 +24,13 @@ export const getProductById = async (req = request, res = response) => {
         console.log('getProductById ->', error)
         return res.status(500).json({ msg: "Hablar con un administrador" })
     }
-}
+};
 
 export const addProduct = async (req = request, res = response) => {
     try {
         const { title, description, price, code, stock, category } = req.body;
 
-        if (!title, !description, !price, !code, !stock, !category)
-            return res.status(404).json({ msg: 'Los campos: title, description, price, img, code, stock son obligatorios' })
-
-        const existeCode = await ProductsRepository.getProductByCode(code);
-
-        if (existeCode)
-            return res.status(400).json({ msg: 'El codigo ingresado ya existe en un producto' });
+        if(!title || !description || !price || !code || !stock || !category) return res.status(400).json({ msj: 'Datos incompletos title, description, price, code, stock, category' })
 
         if (req.file) {
 
@@ -52,9 +47,9 @@ export const addProduct = async (req = request, res = response) => {
         return res.json({ producto })
 
     } catch (error) {
-        return res.status(500).json({ msg: "Hablar con un administrador" })
+        return res.status(500).json({ msg: "Hablar con administrador." })
     }
-}
+};
 
 export const updateProduct = async (req = request, res = response) => {
     try {
@@ -92,7 +87,7 @@ export const updateProduct = async (req = request, res = response) => {
     } catch (error) {
         return res.status(500).json({ msg: "Hablar con un administrador" })
     }
-}
+};
 
 export const deleteProduct = async (req = request, res = response) => {
     try {
@@ -108,4 +103,26 @@ export const deleteProduct = async (req = request, res = response) => {
         console.log('deleteProduct ->', error)
         return res.status(500).json({ msg: "Hablar con un administrador" })
     }
-}
+};
+
+export const mockingProducts = async (req = request, res = response) => {
+    try {
+        faker.location = 'es';
+        const products = Array.from({length:100},(_, index) => ({
+            _id:faker.string.uuid(),
+            title:faker.commerce.productName(),
+            description: faker.lorem.sentence(),
+            code: (index + 1).toString(),
+            price: faker.number.int({min:1, max:100}),
+            status: faker.datatype.boolean(),
+            stock: faker.number.int({min:1, max:100}),
+            category: faker.commerce.department(),
+            thumbnail: faker.image.url(),
+        }));
+
+        return res.json({products});
+    } catch (error) {
+        console.log('mockingProducts ->', error)
+        return res.status(500).json({ msg: "Hablar con administrador." })
+    }
+};

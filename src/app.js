@@ -1,5 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
+import cors from 'cors';
 
 import { productsRouter, cartsRouter, authRouter  } from './routers/index.js';
 
@@ -10,7 +11,7 @@ import { addLogger } from './utils/logger.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
+app.use(cors());
 app.use(addLogger)
 app.get('/test', (req, res) => {
     req.logger.debug('debug')

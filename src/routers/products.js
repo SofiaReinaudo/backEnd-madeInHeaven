@@ -7,9 +7,7 @@ import { existeCode, existeProduct } from '../helpers/db-validaciones.js'
 
 const router = Router();
 
-router.get('/', [
-    validarJWT
-], getProduct);
+router.get('/', getProduct);
 
 router.get('/:pid',[
     validarJWT,
@@ -20,14 +18,14 @@ router.get('/:pid',[
 router.post('/', [
     validarJWT, 
     isAdmin,
-    check('title', 'El campo es obligatorio').not().isEmpty(),
-    check('description', 'El campo es obligatorio').not().isEmpty(),
-    check('code', 'El campo es obligatorio').not().isEmpty(),
-    check('code').custom(existeCode),
-    check('price', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
-    check('stock', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
-    check('category', 'El campo es obligatorio').not().isEmpty(),
-    validarCampos,
+    // check('title', 'El campo es obligatorio').not().isEmpty(),
+    // check('description', 'El campo es obligatorio').not().isEmpty(),
+    // check('code', 'El campo es obligatorio').not().isEmpty(),
+    // check('code').custom(existeCode),
+    // check('price', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
+    // check('stock', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
+    // check('category', 'El campo es obligatorio').not().isEmpty(),
+    // validarCampos,
     uploader.single('file')
 ], addProduct);
 
@@ -46,6 +44,8 @@ router.delete('/:pid',[
     check('pid', 'No es valido el ID del producto').isMongoId(),
     check('pid').custom(existeProduct),
     validarCampos,
-], deleteProduct)
+], deleteProduct);
+
+router.get('/mocking/products', validarJWT, mockingProducts);
 
 export { router as productsRouter };
