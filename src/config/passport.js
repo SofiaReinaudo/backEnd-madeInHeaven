@@ -3,6 +3,7 @@ import local from "passport-local";
 import GitHubStrategy from 'passport-github2';
 import { UsersRepository} from "../repositories/index.js";
 import { createHash, isValidPassword } from "../utils/bcryptPassword.js";
+import { logger } from '../utils/logger.js';
 
 const LocalStrategy = local.Strategy;
 
@@ -15,14 +16,14 @@ export const initializaPassport = () => {
                 const { confirmPassword } = req.body;
 
                 if(password !== confirmPassword){
-                    console.log('No coinciden las contraseñas.')
+                    logger.info('No coinciden las contraseñas');
                     return done(null, false)
                 }
 
                 const user = await UsersRepository.getUserByEmail(username);
 
                 if (user) {
-                    console.log('El usuario ya existe');
+                    logger.info('El usuario ya existe');
                     return done(null,false);
                 }
 
@@ -46,12 +47,12 @@ export const initializaPassport = () => {
                 const user = await UsersRepository.getUserByEmail(username);
 
                 if(!user){
-                    console.log('El usuario no existe.');
+                    logger.info('El usuario no existe');
                     done(null, false);
                 }
 
                 if(!isValidPassword(password,user.password)){
-                    console.log("las contraseñas no coinciden.");
+                    logger.info("la password no coinciden");
                     return (null,false);
                 }
 

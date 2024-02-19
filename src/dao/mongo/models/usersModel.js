@@ -7,7 +7,7 @@ const UserSchema = new Schema({
     lastName:{type: String, required: [true,'El apellido es obligatorio']},
     email:{type: String, required: [true,'El correo es obligatorio'], unique: true},
     password:{type: String, required: [true,'La contraseña es obligatoria']},
-    rol:{type: String, default: 'user', enum: ['user', 'admin']},
+    rol:{type: String, default: 'user', enum: ['user', 'admin', 'premium']},
     status:{type: Boolean, default: true},
     fechaCreacion:{type: Date, default: Date.now},
     image:{type: String},

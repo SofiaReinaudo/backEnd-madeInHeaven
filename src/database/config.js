@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import { logger } from '../utils/logger.js';
 
 export const dbConnection = async () => {
     try {
         await mongoose.connect(process.env.URI_MONGO_DB,{dbName:process.env.NAME_DB});
-        console.log('Base de datos online!');
+        logger.info('Base de datos online');
     } catch (error) {
-        console.log(`Error con la base de datos. ${error}`);
+        logger.error(error);
         process.exit(1);
     }
 }

@@ -1,29 +1,44 @@
 import winston from "winston";
 
-const customLevelOptions = {
-    levels: {
-        fatal: 1,
-        http: 1,
-        error: 1,
-        warning: 1,
-        info: 1,
-        debug: 1
-    }
-}
+//const levels = {
+//    error: 0,
+//    warn: 1,
+//    info: 2,
+//    http: 3,
+//    verbose: 4,
+//    debug: 5,
+//    silly: 6
+//};
 
-export const logger = winston.createLogger({
-    levels: customLevelOptions.levels,
+const devLogger = winston.createLogger({
+    level: 'debug',
     transports: [
         new winston.transports.Console({
-            level: 'fatal',
-            format: winston.format.simple()
+            level: 'debug',
+            format: winston.format.combine(
+                winston.format.colorize(),
+                winston.format.simple(),
+            ),
         }),
-        new winston.transports.File({ filename: './loggerTest.log', level: 'fatal'})
-    ]
+    ],
 })
 
-export const addLogger = (req, res, next) => {
-    req.logger = logger
-    req.logger.info(`[${req.method}] ${req.url} - ${new Date().toLocaleTimeString()}`)
-    next()
-}
+const prodLogger = winston.createLogger({
+    level: 'info',
+    transports: [
+        new winston.transports.Console({
+            level: 'info',
+            format: winston.format.combine(
+                winston.format.colorize(),
+                winston.format.simple(),
+            ),
+        }),
+        new winston.transports.File({
+            filename:'errors.log',
+            level: 'error',
+            format: winston.format.simple()
+        }),
+    ],
+})
+
+export const logger = process.env.NODE_ENV === 'production' ? prodLogger : devLogger;

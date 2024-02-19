@@ -27,7 +27,6 @@ export const getCartById = async (req = request, res = response) => {
 //         const carrito = await CartsRepository.createCart();
 //         return res.json({ msg: 'Carrito creado', carrito });
 //     } catch (error) {
-//         console.log('createCart -> ', error);
 //         return res.status(500).json({ msg: 'Hablar con un administrador' });
 //     }
 // }
@@ -169,7 +168,6 @@ export const finalizarCompra = async (req = request, res = response) => {
         return res.json({ ok: true, msg: 'Compra generada', ticket: { code, cliente: purchase, items, amount } });
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ msg: 'Hablar con un administrador' });
     }
 }

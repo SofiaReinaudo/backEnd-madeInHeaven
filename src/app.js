@@ -7,22 +7,14 @@ import { productsRouter, cartsRouter, authRouter  } from './routers/index.js';
 import __dirname from './utils.js';
 import { dbConnection } from './database/config.js';
 
-import { addLogger } from './utils/logger.js';
+import { logger } from './utils/logger.js';
+import { requestUrl } from './middleware/logger.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-app.use(cors());
-app.use(addLogger)
-app.get('/test', (req, res) => {
-    req.logger.debug('debug')
-    req.logger.http('http')
-    req.logger.info('Info (Info)')
-    req.logger.warning('WARNING')
-    req.logger.error('Erros')
-    req.logger.fatal('Fatal')
-    res.send('Todo ok')
-})
 
+app.use(cors());
+app.use(requestUrl);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'));
@@ -33,7 +25,7 @@ app.use('/api/carts', cartsRouter);
 
 await dbConnection();
 
-app.listen(PORT, () => {console.log(`Corriendo en el puerto ${PORT}`);});
+app.listen(PORT, () => {logger.info(`Corriendo en el puerto ${PORT}`);});
 
 
 

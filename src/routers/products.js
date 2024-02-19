@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addProduct, deleteProduct, getProduct, getProductById, updateProduct } from '../controllers/products.js';
+import { addProduct, deleteProduct, getProduct, getProductById, updateProduct, mockingProducts } from '../controllers/products.js';
 import { uploader } from '../config/multer.js';
 import { validarCampos, validarJWT, isAdmin } from '../middleware/auth.js';
 import { check } from 'express-validator';
