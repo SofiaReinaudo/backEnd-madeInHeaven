@@ -1,0 +1,87 @@
+paths:
+  /api/auth/login:
+    post:
+      summary: Realizar el login en la app
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: Correo electrónico del usuario
+                password:
+                  type: string
+                  description: Contraseña del usuario
+      responses:
+        '200':
+          description: Login correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  usuario:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      lastName:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+                      rol:
+                        type: string
+                      status:
+                        type: boolean
+                      github:
+                        type: boolean
+                      google:
+                        type: boolean
+                      facebook:
+                        type: boolean
+                      cart_id:
+                        type: string
+                      fechaCreacion:
+                        type: string
+                  token:
+                    type: string
+        '400':
+          description: Datos Invalidos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: false
+                  msg:
+                    type: Datos incorrectos
+
+  /api/auth/register:
+    post:
+      summary: Registrar un usuario
+      tags:
+        - Users
+  
+  /api/auth/cambiar-password:
+    post:
+      summary: Registrar un usuario
+      tags:
+        - Users
+  
+  /api/auth/reset-password:
+    get:
+      summary: Registrar un usuario
+      tags:
+        - Users
