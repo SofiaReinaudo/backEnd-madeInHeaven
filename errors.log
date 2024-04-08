@@ -1,0 +1,25 @@
+error: undefined {"address":"172.217.192.109","code":"ESOCKET","command":"CONN","errno":-4039,"port":578,"syscall":"connect"}
+error: undefined {"address":"172.217.192.109","code":"ESOCKET","command":"CONN","errno":-4039,"port":578,"syscall":"connect"}
+error: undefined {"code":"EAUTH","command":"AUTH PLAIN","response":"535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials ph12-20020a17090b3bcc00b0029696f7f443sm365532pjb.50 - gsmtp","responseCode":535}
+error: jwt expired {"expiredAt":"2024-02-17T01:24:38.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-02-17T01:24:38.000Z","name":"TokenExpiredError"}
+error: undefined
+error: undefined
+error: invalid signature {"name":"JsonWebTokenError"}
+error: undefined {"_message":"Producto validation failed","errors":{"owner":{"kind":"required","message":"El owner es obligatorio","name":"ValidatorError","path":"owner","properties":{"message":"El owner es obligatorio","path":"owner","type":"required"}}}}
+error: undefined {"_message":"Producto validation failed","errors":{"owner":{"kind":"required","message":"El owner es obligatorio","name":"ValidatorError","path":"owner","properties":{"message":"El owner es obligatorio","path":"owner","type":"required"}}}}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":"ejemplo"}}
+error: jwt expired {"expiredAt":"2024-01-25T08:03:50.000Z","name":"TokenExpiredError"}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":"2"}}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":"lksndflksnd"}}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":"test"}}
+error: jwt expired {"expiredAt":"2024-01-25T08:03:50.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-03-29T10:11:22.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-02-11T23:29:27.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-02-11T23:29:27.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-02-11T23:29:27.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-02-11T23:29:27.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-01-25T10:08:15.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-01-25T05:41:39.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-03-30T06:30:53.000Z","name":"TokenExpiredError"}
+error: jwt expired {"expiredAt":"2024-03-30T02:43:06.000Z","name":"TokenExpiredError"}

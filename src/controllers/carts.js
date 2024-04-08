@@ -1,6 +1,8 @@
 import { request, response } from 'express';
 import { CartsRepository, ProductsRepository, TicketsRepository, UsersRepository } from '../repositories/index.js';
 import { v4 as uuidv4 } from 'uuid';
+import { logger } from '../utils/logger.js';
+import { sendEmailTicket } from '../helpers/send-email.js';
 
 export const getCartById = async (req = request, res = response) => {
     try {
@@ -27,6 +29,7 @@ export const getCartById = async (req = request, res = response) => {
 //         const carrito = await CartsRepository.createCart();
 //         return res.json({ msg: 'Carrito creado', carrito });
 //     } catch (error) {
+//          logger.error('createCart -> ', error);
 //         return res.status(500).json({ msg: 'Hablar con un administrador' });
 //     }
 // }
@@ -161,13 +164,17 @@ export const finalizarCompra = async (req = request, res = response) => {
         items.forEach(element => { amount = amount + element.total });
         const purchase = usuario.email;
         const code = uuidv4();
-        await TicketsRepository.createTicket({ items, amount, purchase, code });
+        const ticketCompra = await TicketsRepository.createTicket({ items, amount, purchase, code });
+
+        // enviar email del recibo de la compra
+        sendEmailTicket(usuario.email,code,usuario.name,items,amount);
 
         await CartsRepository.deleteAllProductsInCart(usuario.cart_id);
 
         return res.json({ ok: true, msg: 'Compra generada', ticket: { code, cliente: purchase, items, amount } });
 
     } catch (error) {
+        logger.error(error);
         return res.status(500).json({ msg: 'Hablar con un administrador' });
     }
 }
