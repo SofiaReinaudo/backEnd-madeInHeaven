@@ -18,14 +18,6 @@ router.get('/:pid',[
 router.post('/', [
     validarJWT, 
     isAdmin,
-    // check('title', 'El campo es obligatorio').not().isEmpty(),
-    // check('description', 'El campo es obligatorio').not().isEmpty(),
-    // check('code', 'El campo es obligatorio').not().isEmpty(),
-    // check('code').custom(existeCode),
-    // check('price', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
-    // check('stock', 'El campo es obligatorio y numerico').not().isEmpty().isNumeric(),
-    // check('category', 'El campo es obligatorio').not().isEmpty(),
-    // validarCampos,
     uploader.single('file')
 ], addProduct);
 

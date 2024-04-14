@@ -3,7 +3,9 @@ import 'dotenv/config';
 import cors from 'cors';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUiExpress from 'swagger-ui-express';
-import { authRouter, productsRouter, cartsRouter, ticketsRouter } from "./routers/index.js";
+
+import { productsRouter, cartsRouter, authRouter, ticketsRouter } from "./routers/index.js";
+
 import __dirname from "./utils.js";
 import { dbConnection } from "./database/config.js";
 import { logger } from "./utils/logger.js";
@@ -19,14 +21,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 const swaggerOptions = {
     definition: {
         openapi: '3.1.0',
         info: {
             title: 'Documentacion de la API Made In Heaven',
-            description: 'Made In Heaven'
+            description: 'Made In Heaven - Sofia Reinaudo'
         }
     },
     apis: [`${__dirname}/docs/**/*.yaml`],
@@ -44,7 +46,7 @@ app.use('/documentacion-api', swaggerUiExpress.serve, swaggerUiExpress.setup(spe
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173'
+        origin: 'https://made-in-heaven.netlify.app'
     }
 });
 
@@ -61,7 +63,7 @@ io.on('connection', socket => {
     })
 });
 
-// app.listen(PORT, () => { logger.info(`Corriendo aplicacion en el puerto ${PORT}`) });
+
 server.listen(PORT, () => { logger.info(`Corriendo aplicacion en el puerto ${PORT}`) });
 
 
