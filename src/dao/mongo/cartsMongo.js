@@ -1,6 +1,6 @@
 import { cartModel } from './models/cartsModel.js';
 
-export const getCartById = async (cid) => await cartModel.findById(cid).populate('products.id', ['title', 'price', 'stock']);
+export const getCartById = async (cid) => await cartModel.findById(cid).populate('products.id', ['title', 'price', 'stock','thumbnail']);
 
 export const createCart = async () => await cartModel.create({});
 
@@ -18,13 +18,13 @@ export const addProductInCart = async (cid, pid) => {
     else
         carrito.products.push({ id: pid, quantity: 1 });
 
-    carrito.save();
+    await carrito.save();
 
-    return carrito;
+    return await getCartById(cid);
 }
 
 export const deleteProductsInCart = async (cid, pid) =>
-    await cartModel.findByIdAndUpdate(cid, { $pull: { 'products': { id: pid } } }, { new: true });
+    await cartModel.findByIdAndUpdate(cid, { $pull: { 'products': { id: pid } } }, { new: true }).populate('products.id', ['title', 'price', 'stock','thumbnail']);
 
 
 export const updateProductsInCart = async (cid, pid, quantity) =>
@@ -32,8 +32,9 @@ export const updateProductsInCart = async (cid, pid, quantity) =>
         { _id: cid, 'products.id': pid },
         { $set: { 'products.$.quantity': quantity } },
         { new: true }
-    );
+    ).populate('products.id', ['title', 'price', 'stock','thumbnail']);
 
 export const deleteCart = async (cid) => await cartModel.findByIdAndDelete(cid);
 
 export const deleteAllProductsInCart = async (cid) => await cartModel.findByIdAndUpdate(cid, { $set: { 'products': [] } }, { new: true });
+
